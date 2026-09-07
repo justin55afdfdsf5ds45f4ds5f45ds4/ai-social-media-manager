@@ -10,6 +10,9 @@
     "accounts": "npm --prefix dashboard run accounts",
     "sync": "npm --prefix dashboard run sync",
     "queue": "npm --prefix dashboard run queue",
-    "setup": "npm --prefix dashboard install"
-  }
+    "setup": "npm --prefix dashboard install",
+    "styles": "npm --prefix dashboard run styles"
+  },
+  "license": "MIT",
+  "repository": "github:justin55afdfdsf5ds45f4ds5f45ds4/ai-social-media-manager"
 }

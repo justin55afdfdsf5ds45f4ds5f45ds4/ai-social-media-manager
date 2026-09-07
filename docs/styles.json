@@ -5,24 +5,51 @@
       "id": "S01",
       "name": "Collage",
       "sheet": "docs/styles/S01-collage.md",
-      "engine": { "kind": "remotion", "path": "reels/collage (copy of Talking head AI Ads God/studio)", "fps": 30, "size": "1080x1920" },
-      "source": ["Learning materials/ref/refA.mp4", "Learning materials/ref/refB.mp4", "Learning materials/ref/refC.mp4"],
-      "approved_outputs": ["Learning materials/output/motionvid-02-collage.mp4", "Learning materials/output/motionvid-03-collage.mp4"],
+      "engine": {
+        "kind": "remotion",
+        "path": "reels/collage (git submodule: collage-pipeline)",
+        "fps": 30,
+        "size": "1080x1920"
+      },
+      "source": [
+        "Learning materials/ref/refA.mp4",
+        "Learning materials/ref/refB.mp4",
+        "Learning materials/ref/refC.mp4"
+      ],
+      "approved_outputs": [
+        "Learning materials/output/motionvid-02-collage.mp4",
+        "Learning materials/output/motionvid-03-collage.mp4"
+      ],
       "assets": "A-* props, C-* cutouts, F-* footage, V-* samples (docs/assets.json)",
       "status": "approved by owner (2026-09-06: 'only the collage style')",
-      "audio": { "riser": "t=0 untouched", "hits": "button_0-3 only", "music_db_under_voice": 12 }
+      "audio": {
+        "riser": "t=0 untouched",
+        "hits": "button_0-3 only",
+        "music_db_under_voice": 12
+      }
     },
     {
       "id": "S02",
       "name": "Premium",
       "sheet": "docs/styles/S02-premium.md",
-      "engine": { "kind": "canvas-drawFrame", "path": "reels/premium", "fps": 25, "size": "1080x1920 (720x1280 x1.5)" },
-      "source": ["Learning materials/kits/clone-kit-premium/reference.mp4"],
+      "engine": {
+        "kind": "canvas-drawFrame",
+        "path": "reels/premium",
+        "fps": 25,
+        "size": "1080x1920 (720x1280 x1.5)"
+      },
+      "source": [
+        "Learning materials/kits/clone-kit-premium/reference.mp4"
+      ],
       "dissection": "Learning materials/kits/clone-kit-premium/reference_dissection.js",
       "proof": "reels/premium/proof/render-check-2026-09-06.png",
       "assets": "P-* objects, T-* transitions (docs/assets.json)",
       "status": "engine proven on this machine 2026-09-06; first reel not yet made; button hits not yet wired into the engine",
-      "audio": { "riser": "t=0 untouched (build.sh)", "hits": "button_0-3 on board landings (to wire)", "music_db_under_voice": 12 }
+      "audio": {
+        "riser": "t=0 untouched (build.sh)",
+        "hits": "button_0-3 on board landings (to wire)",
+        "music_db_under_voice": 12
+      }
     }
   ]
 }

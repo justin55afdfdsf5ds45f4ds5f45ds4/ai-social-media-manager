@@ -10,7 +10,8 @@
     "submit": "tsx scripts/submit.ts",
     "accounts": "tsx scripts/accounts.ts",
     "sync": "tsx scripts/sync.ts",
-    "queue": "tsx scripts/queue.ts"
+    "queue": "tsx scripts/queue.ts",
+    "styles": "tsx scripts/styles.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
