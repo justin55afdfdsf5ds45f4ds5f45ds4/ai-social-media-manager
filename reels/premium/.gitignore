@@ -1,0 +1,6 @@
+node_modules/
+seg/
+*.wav
+video_only.mp4
+reel.mp4
+frames/

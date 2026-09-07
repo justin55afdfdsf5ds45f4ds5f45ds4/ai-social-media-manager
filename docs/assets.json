@@ -1,0 +1,61 @@
+{
+  "_": "Asset registry. Every id can be named in a plan.json `show[].asset`. `means` is what the object says on screen; `styles` = where it fits.",
+  "props": {
+    "A-sticker":     { "styles": ["S01"], "means": "a person / a logo card", "kind": "CollageTemplate sticker" },
+    "A-polaroid":    { "styles": ["S01"], "means": "a clip, a photo, a finished video", "kind": "polaroid (video inside, play button)" },
+    "A-doc":         { "styles": ["S01"], "means": "a PDF, a document, homework", "kind": "doc (real: true = readable A4)" },
+    "A-phone":       { "styles": ["S01"], "means": "the product on a phone, a reel", "kind": "phone" },
+    "A-screen":      { "styles": ["S01"], "means": "the product in a browser", "kind": "screen + footage" },
+    "A-clock":       { "styles": ["S01"], "means": "time passing, hours", "kind": "clock (spin)" },
+    "A-chart":       { "styles": ["S01"], "means": "numbers growing", "kind": "chart (growAt, destroyAt)" },
+    "A-eye":         { "styles": ["S01"], "means": "attention, not reading", "kind": "eye (closeAt, openAt)" },
+    "A-paint":       { "styles": ["S01"], "means": "the hook word, a stamp", "kind": "paint stroke + stencil" },
+    "A-newspaper":   { "styles": ["S01"], "means": "a headline moment", "kind": "newspaper" },
+    "A-calendar":    { "styles": ["S01"], "means": "every week / a date", "kind": "calendar" },
+    "A-envelope":    { "styles": ["S01"], "means": "a reply, a DM, a link sent", "kind": "envelope" },
+    "A-bubble":      { "styles": ["S01"], "means": "a typed prompt, the comment word", "kind": "bubble" },
+    "A-starburst":   { "styles": ["S01"], "means": "the reveal, 'came back'", "kind": "starburst" },
+    "A-arrow":       { "styles": ["S01"], "means": "A -> B", "kind": "arrow" },
+    "A-xmark":       { "styles": ["S01"], "means": "crossing out", "kind": "xmark" },
+    "A-silhouettes": { "styles": ["S01"], "means": "a crowd, the competitor", "kind": "silhouettes" },
+    "A-note":        { "styles": ["S01"], "means": "a handwritten aside", "kind": "note (Caveat)" },
+    "A-progress":    { "styles": ["S01"], "means": "exporting, loading, watched", "kind": "progress" },
+    "P-glass-tile":      { "styles": ["S02"], "means": "an icon object (people, play, enter)", "kind": "engine.js glass object" },
+    "P-question-panel":  { "styles": ["S02"], "means": "the unknown, 'what if'", "kind": "engine.js ? panel" },
+    "P-clock-card":      { "styles": ["S02"], "means": "time passing", "kind": "engine.js clock on teal card" },
+    "P-pill-morph":      { "styles": ["S02"], "means": "numbered steps", "kind": "engine.js circle -> pill" },
+    "P-cards-2x2":       { "styles": ["S02"], "means": "results, the finished video", "kind": "engine.js video cards (assets/card1-4.png)" },
+    "P-tilted-screen":   { "styles": ["S02"], "means": "the product, a prompt being typed", "kind": "engine.js perspective UI + TYPED[]" },
+    "P-timeline-panel":  { "styles": ["S02"], "means": "editing pain", "kind": "engine.js timeline" },
+    "P-ig-post":         { "styles": ["S02"], "means": "the CTA (comment / save)", "kind": "engine.js igPost (assets/post.png)" },
+    "P-link-card":       { "styles": ["S02"], "means": "the link payoff", "kind": "engine.js link card" }
+  },
+  "transitions": {
+    "T-whip":   { "styles": ["S02"], "rule": "one camera move between boards in one world, 0.6-0.8 s, smear" },
+    "T-cut":    { "styles": ["S01", "S02"], "rule": "hard cut; S01 uses it only into pop scenes" },
+    "T-xfade":  { "styles": ["S02"], "rule": "overlay dissolve, once" },
+    "T-strobe": { "styles": ["S02"], "rule": "8-frame light-leak flicker before the Instagram beat" },
+    "T-pan":    { "styles": ["S01"], "rule": "ramped pan across the table, 18 frames (pan-left / pan-up)" },
+    "T-push":   { "styles": ["S01"], "rule": "ramped dolly onto the prop on the emphasis word, 0.35-0.6 s, <= 1.4x" }
+  },
+  "cutouts": {
+    "C-founder-couch": {}, "C-founder-facepalm": {}, "C-founder-typing": {}, "C-founder-night": {},
+    "C-handshake": {}, "C-investor-a": {}, "C-investor-b": {}, "C-investors": {}, "C-bored-phone": {},
+    "_": "Talking head AI Ads God/studio/public/library/cutouts/*.png (sepia, rembg). New people: scripts/cutout.py"
+  },
+  "footage": {
+    "F-motionvid-home-typing": {}, "F-motionvid-editor-build": {}, "F-motionvid-editor-chat": {}, "F-motionvid-projects": {},
+    "_": "studio/public/footage/motionvid/*.mp4 (browser viewport crops of the platform recording)"
+  },
+  "samples": {
+    "V-3d-battle-maps": {}, "V-character-explainers": {}, "V-sketch-explainers": {}, "V-storytelling-animations": {},
+    "V-style-dan-koe-3": {}, "V-style-kurzgesagt": {}, "V-style-new-iman-gadzhi": {}, "V-style-vox-collage": {}, "V-title-animations": {},
+    "_": "studio/public/library/clips/motionvid-samples/*.mp4 - real MotionVid renders, always muted"
+  },
+  "sounds": {
+    "X-riser":      { "file": "Learning materials/assets/Riser.mp3", "rule": "every reel, t=0, gain 1.0, untouched" },
+    "X-button-0..3":{ "file": "studio/public/sfx/button_0-3.wav", "rule": "the only hit sounds; 2 frames ahead of the visual" },
+    "X-music":      { "file": "studio/public/music/library/*.mp3 (76 tracks, Notion library, manifest.json vibes)", "rule": "12 dB under the voice" },
+    "_banned":      "whooshes, synthesized sfx, button_4-8, anything from the video-editor kit's 152 sfx until the owner approves it"
+  }
+}

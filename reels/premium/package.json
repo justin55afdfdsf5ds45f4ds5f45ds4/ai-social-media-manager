@@ -1,0 +1,6 @@
+{
+  "name": "premium-style-engine",
+  "private": true,
+  "description": "S02 Premium style: one pure drawFrame(ctx, t) canvas engine (from clone_kit)",
+  "dependencies": { "@napi-rs/canvas": "^0.1.60" }
+}

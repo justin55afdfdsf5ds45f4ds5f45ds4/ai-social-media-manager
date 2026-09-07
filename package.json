@@ -1,0 +1,15 @@
+{
+  "name": "ai-social-media-manager",
+  "private": true,
+  "description": "AI-made Instagram reels → review in a calendar → publish via Blotato",
+  "scripts": {
+    "dev": "npm --prefix dashboard run dev",
+    "build": "npm --prefix dashboard run build",
+    "start": "npm --prefix dashboard run start",
+    "submit": "npm --prefix dashboard run submit --",
+    "accounts": "npm --prefix dashboard run accounts",
+    "sync": "npm --prefix dashboard run sync",
+    "queue": "npm --prefix dashboard run queue",
+    "setup": "npm --prefix dashboard install"
+  }
+}

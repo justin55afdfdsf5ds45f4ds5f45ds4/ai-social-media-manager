@@ -1,0 +1,17 @@
+{
+  "timezone": "Asia/Kolkata",
+  "postingWindows": [
+    { "start": "11:00", "end": "13:30" },
+    { "start": "18:00", "end": "21:00" }
+  ],
+  "randomSchedule": {
+    "daysAhead": 7,
+    "minGapHours": 20,
+    "maxPerDay": 1,
+    "roundToMinutes": 5
+  },
+  "instagram": {
+    "shareToFeed": true,
+    "defaultHashtags": []
+  }
+}

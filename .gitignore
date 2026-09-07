@@ -1,0 +1,52 @@
+# ---- secrets -------------------------------------------------------------
+.env
+.env.*
+!.env.example
+
+# ---- dependencies / builds ----------------------------------------------
+node_modules/
+dashboard/.next/
+dashboard/out/
+dashboard/next-env.d.ts
+*.tsbuildinfo
+__pycache__/
+*.pyc
+
+# ---- the owner's private material (never published) ---------------------
+# reference reels, voiceovers, music library, third-party kits, renders
+Learning materials/
+content/posts/*
+!content/posts/.gitkeep
+content/inbox/*
+!content/inbox/.gitkeep
+data/posts.json
+data/*.bak
+*.mp4
+*.mov
+*.mp3
+*.wav
+*.m4a
+!reels/collage/**
+
+# bring-your-own audio (see assets/audio/README.md)
+assets/audio/*
+!assets/audio/README.md
+
+# ---- reel engines: per-reel work folders and heavy kit files ------------
+reels/*/node_modules/
+reels/*/seg/
+reels/*/frames/
+reels/premium/vo-*/
+reels/premium/reference.mp4
+reels/premium/ref.srt
+reels/premium/ref_words.json
+reels/premium/vo.srt
+reels/premium/preview.html
+reels/premium/look/
+reels/premium/proof/*.mp4
+
+# ---- os / editor ---------------------------------------------------------
+.DS_Store
+Thumbs.db
+.vscode/
+deploy/dashboard.log
