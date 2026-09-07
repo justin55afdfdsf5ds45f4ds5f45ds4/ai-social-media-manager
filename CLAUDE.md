@@ -19,6 +19,7 @@ keep the calendar healthy. The human approves; Blotato posts.
 | `reels/` | The render engines, one folder per style. `reels/premium/` is S02 (canvas `drawFrame`, proven). `reels/collage/` is S01 (git submodule of collage-pipeline). |
 | `docs/style-kits.md` | How a dropped kit becomes a style with an id, and when a kit resolves to an EXISTING id instead. |
 | `assets/audio/` | Bring-your-own riser, button hits, music beds (git-ignored). Engines read from here. |
+| `tools/asset.mjs` | Asset generation with fal.ai (`FAL_KEY` in .env): reference frame → object on a transparent background → `assets/generated/`. Read `tools/README.md`; never draw a stand-in when the object can be generated. |
 | `Learning materials/kits/` | The three kits: `clone-kit-premium` (S02 source), `0x100x-clone-kit` (the clone discipline), `video-editor-client` (HyperFrames system; its rules are folded into reel-method §3b, its SFX are NOT approved). |
 | `docs/blotato-api.md` | Exact Blotato endpoints and payloads used here. |
 | `docs/calendar-sidebar-reference.md` | Visual spec for the dashboard UI. |

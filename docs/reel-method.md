@@ -108,6 +108,12 @@ Adopted because they match what the owner already asked for:
   real thing.
 * **No pure white; every effect at half of what first looked exciting.**
 
+## 3c. Generated assets
+
+When a plan needs an object the style kit lacks, generate it, never draw a stand-in: `tools/README.md`. Reference
+frame first, native transparent background, segmentation only for opaque objects, chroma key last. A generated
+asset gets an id (`G-*`) and the same justification rule as any prop.
+
 ## 4. The process per voiceover
 
 ```
@@ -115,6 +121,8 @@ content/inbox/<name>.mp3
   1. cut_silence  -> vo-tight.mp3 (+ cuts.json)
   2. transcribe   -> words.json (faster-whisper, word times)
   3. PLAN         -> plan.json  (this document's §1; checked against the 10 rules; shown to the owner on request)
+  3b. ASSETS      -> every object the plan names that the style kit does not have: tools/asset.mjs (fal.ai), reference
+                     frame + native transparent background, saved to assets/generated/<style>/ and given an id in docs/assets.json
   4. spec         -> S01: studio/src/videos/<id>.ts · S02: reels/premium/<id>/engine.js SCENES/TRANS/TYPED (from the plan)
   5. QA stills    -> 6 frames with showSafeZone, one per beat with a prop; fix the plan, not the frames
   6. render       -> reel.mp4 (GPU flags), music + riser + buttons mixed in the template

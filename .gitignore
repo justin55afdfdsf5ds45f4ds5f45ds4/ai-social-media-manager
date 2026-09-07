@@ -50,3 +50,4 @@ reels/premium/proof/*.mp4
 Thumbs.db
 .vscode/
 deploy/dashboard.log
+assets/generated/
