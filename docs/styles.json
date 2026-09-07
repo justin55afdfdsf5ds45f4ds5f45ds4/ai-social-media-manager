@@ -44,12 +44,13 @@
       "dissection": "Learning materials/kits/clone-kit-premium/reference_dissection.js",
       "proof": "reels/premium/proof/render-check-2026-09-06.png",
       "assets": "P-* objects, T-* transitions (docs/assets.json)",
-      "status": "engine proven on this machine 2026-09-06; first reel not yet made; button hits not yet wired into the engine",
+      "status": "first reel made and posted 2026-09-07 (problem-steps-proof, vo-04-tight); button hits wired via mix.js",
       "audio": {
-        "riser": "t=0 untouched (build.sh)",
-        "hits": "button_0-3 on board landings (to wire)",
+        "riser": "t=0 untouched (mix.js)",
+        "hits": "button_0-3 on every object landing, 2 frames early (hits.json -> mix.js)",
         "music_db_under_voice": 12
-      }
+      },
+      "example_plan": "docs/examples/plan-S02-problem-steps-proof.json"
     }
   ]
 }
