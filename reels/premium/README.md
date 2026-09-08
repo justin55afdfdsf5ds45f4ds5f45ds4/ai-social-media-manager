@@ -1,65 +1,36 @@
-# Reference clone kit — "problem · steps · proof"
+# reels/premium – the S02 Premium engine
 
-A frame-by-frame clone of a kinetic-typography Instagram reel (the reference MP4), rebuilt around a new
-voice-over. The reference's audio is muted; the VO is the only audio track. Everything that was measured
-in the reference and every decision made in the rebuild is in this folder, so another AI can pick it up,
-remake the film, swap the placeholders, or produce a new film in the same style from a different VO.
+One pure function, `drawFrame(ctx, t)` in `engine.js`, paints any frame of a film: a dark green-grey text
+board the camera flies across, Helvetica bold/light with a felt-tip script for emphasis words, glass
+objects, teal cards, hold-move-hold camera, whips, a typed-in screen, a strobe into an Instagram CTA.
+Style sheet with the measured numbers: `docs/styles/S02-premium.md`. Design space 720×1280 at 25 fps,
+rendered ×1.5 = 1080×1920.
 
 ## Files
 
-| file | what it is |
+| file | what |
 |---|---|
-| `problem_steps_proof_clone.mp4` | the finished film, 1080x1920, 25 fps, 51.64 s, VO at -14 LUFS |
-| `reference.mp4` | the reference reel that was cloned (720x1280, 25 fps, 25 s) |
-| `vo.mp3` | the voice-over (ElevenLabs Adam) |
-| `reference_dissection.js` | **read this first** — the reference's transcript, shot list, style system, measured camera motion, transition list, the VO transcript, the beat map (VO beat → reference asset → engine scene) and the placeholder slots |
-| `engine.js` | the film. One pure function `drawFrame(ctx, t)`. The header comment explains the architecture and how to remake the film with a new VO |
-| `preview.html` | scrubbable silent preview of `engine.js` in a browser (fonts fall back to Helvetica/Arial there) |
-| `render_seg.js` | renders a frame range straight into ffmpeg (raw RGBA pipe, no PNGs) → one MP4 segment |
-| `drive.sh` | renders all missing 130-frame segments within a ~36 s budget; run it until it prints `ALLDONE` |
-| `build.sh` | concatenates the segments, normalises the VO, muxes, final x264 encode |
-| `render.js` | stills at given seconds (`node render.js out preview 1.2 3.4 …`) or PNG frames |
-| `load_assets.js` | picks up placeholder replacements from `assets/` |
-| `fonts/` | Caveat (script), Permanent Marker (unused alt). Bold/regular grotesque = TeX Gyre Heros from the system (Helvetica clone) |
-| `ref_words.json`, `vo_words.json`, `*.srt` | word-level transcripts of both audio tracks |
-| `measurements.json` | raw measurements (per-frame luminance/diff of the reference, phase-correlation motion) |
-| `sheet_ref.png`, `sheet_final.png` | contact sheets of the reference and of the clone |
-| `look/` | frame-by-frame crops used to measure the caption reveal and the whips |
+| `engine.js` | the film: SCENES (one per board: camera keys + draw), TRANS (whip / cut / xfade / strobe), TYPED (the sentence typed into the screen). The header comment explains how to write a new film. |
+| `reference_dissection.js` | everything measured on the reference: shot list, style system, camera motion tables, transitions, the beat map. Read before writing a new film. |
+| `retime.js` | `node retime.js <reelDir> <words.json> [duration]` – re-targets the film to a tightened take of the same script (word-anchored remap of every time literal, whip lengths restored), applies the plan's beat edits, writes `plan.json` and `hits.json`. |
+| `render.js` | stills: `SC=1 REEL=<reelDir> node render.js <outDir> preview 1.2 5.0 …` |
+| `render_seg.js` | one frame range → one MP4 segment via ffmpeg pipe (`SC=1.5` for 1080p) |
+| `drive.sh` | `REEL=<reelDir> ./drive.sh` renders the missing segments (run until `ALLDONE`) |
+| `mix.js` | the audio law: voice at −14 LUFS + `assets/audio/riser.mp3` at 0 s untouched + optional `<reelDir>/music.*` at −26 LUFS + one button per `hits.json` entry, limiter |
+| `build.sh` | `REEL=<reelDir> ./build.sh` → `<reelDir>/reel.mp4` |
+| `load_assets.js` | picks up `<reelDir>/assets/card1-4.png` (9:16 stills) and `post.png` (1:1) |
+| `fonts/` | TeX Gyre Heros regular/bold (Helvetica clone), Caveat, Permanent Marker |
+| `proof/` | the render check that proved the engine on this machine |
 
-## Run it
+## Make a reel
 
-```bash
-npm i @napi-rs/canvas          # prebuilt binary
-./drive.sh                     # repeat until it prints ALLDONE (each call renders ~260 frames)
-./build.sh                     # -> problem_steps_proof_clone.mp4
+```
+mkdir <reel> && cp vo-tight.mp3 <reel>/vo.mp3 && cp words.json <reel>/words.json
+node retime.js <reel> <reel>/words.json           # if the script is the kit's; otherwise write SCENES from plan.json
+SC=1 REEL=<reel> node render.js <reel>/qa preview 1 4 8 12 …   # look at the stills, fix the plan
+REEL=<reel> ./drive.sh                              # until ALLDONE
+cp <bed>.mp3 <reel>/music.mp3 && REEL=<reel> ./build.sh
 ```
 
-`SC=1 ./drive.sh` renders at 720x1280 (faster). `drive.sh` skips segments that already exist, so a
-one-beat change only re-renders the segments that beat touches — delete those `seg/seg_XXXX.mp4` first.
-
-## Replace the placeholders
-
-Drop files into `assets/` and re-render the affected segments:
-
-- `assets/card1.png` … `card4.png` — 9:16 stills of the finished video (scene `finished`, 28.9–33.6 s). Drawn object-fit cover inside the four cards.
-- `assets/post.png` — 1:1 still for the Instagram post media (scene `comment-tool`, 46.4 s → end).
-
-Both currently use procedural stand-ins (caption frame, motion bars, waveform, "3×", and a "PROBLEM / STEPS / PROOF" tile). The handle in the post header is the string `'justin_lords'` in `igPost()`.
-
-## How the reference was dissected (method, so it can be repeated on any reference)
-
-1. `ffprobe` both files; extract every frame (`fps=25`) and a 2 fps contact sheet; look at it.
-2. Transcribe both audio tracks word-level (faster-whisper via `tools/transcribe.py`).
-3. Per-frame mean luminance + mean absolute frame difference → finds fades, hard cuts, whips and the 8-frame strobe (`measurements.json`).
-4. Phase-correlation between consecutive frames → the camera's translation per frame. This is what showed the camera is **hold → eased move → hold**, not a continuous drift (`reference_dissection.js → reference.motionPer0_2s`).
-5. Frame-by-frame crops of individual word reveals → blur-in over ~5 frames with a slight rise, script words grow from ~0.85, bold words settle from ~1.12 (`look/reveal1.png`, `look/reveal2.png`).
-6. Close reads of the objects (clock card, "?" panels, pill morph, tilted screen, Instagram rail) → rebuilt as canvas primitives in `engine.js`.
-7. The VO's word onsets become the `t` of every caption; the beat map decides which reference board type each VO beat borrows.
-
-## Where things live in engine.js
-
-- captions: `W_(voTime, 'word', 'bold' | 'light' | 'script', px)` inside each scene's `draw`
-- camera: `keys: [K(t, dur, x, y, z, rot, [driftX, driftY])]` — one key per word cluster
-- transitions: `TRANS` — `whip` (continuous camera move, both boards in one world), `cut`, `xfade`, `strobe`
-- typed sentence on the UI screen: `TYPED`
-- palette and type colours: `C`
+Per-reel folders (`vo-*/`) are git-ignored: they hold the owner's voice and music. The engine, tools,
+fonts and measurements are what the repo publishes.

@@ -1,8 +1,8 @@
 # Reel method – the standing rules for every faceless reel
 
 Learned from `Learning materials/` (the collage system, its references, the owner's feedback rounds) on 2026-09-06.
-The engine is the Remotion `CollageTemplate` (working copy: `C:\YouTube Automations Builds\Talking head AI Ads God\studio`,
-public copy: `C:\YouTube Automations Builds\collage-pipeline`). We do not build a new engine. We build PLANS and ASSETS for it.
+Two engines exist: S01 Collage (`reels/collage`, Remotion) and S02 Premium (`reels/premium`, canvas). We do not build
+new engines for a voiceover; we build PLANS and ASSETS for a named style, and a new engine only when a kit is a new style.
 
 ## 0. The one rule above all: the shot plan comes first
 
@@ -64,9 +64,9 @@ Rules the plan must pass (the AI checks them before rendering, and says so):
 | Layer | Rule |
 |---|---|
 | Voice | Untouched except `cut_silence.py` (silences only, max pause 0.22 s). Transcribe AFTER cutting. |
-| Riser | `Learning materials/assets/Riser.mp3` (2.28 s, peak −1.2 dB). **In every reel, at t = 0, as-is, gain 1.0.** No normalising, no trimming. |
-| Hits | Only the owner's Button sounds (button_0–3) on prop landings and cuts, 2 frames ahead of the visual. |
-| Music | A bed from the Notion library, **≈ 12 dB under the voice peak** (the owner's "50 % lower" – half as loud). Fades in over 20 f, out over 40 f. Adjustable per reel with `musicVolume`. |
+| Riser | `assets/audio/riser.mp3` (2.28 s, peak −1.2 dB). **In every reel, at t = 0, as-is, gain 1.0.** No normalising, no trimming. |
+| Hits | Only the owner's Button sounds (`assets/audio/sfx/button_0–3.wav`) on prop landings and cuts, 2 frames ahead of the visual. |
+| Music | A bed from `assets/audio/music/` (the owner's Notion library), **≈ 12 dB under the voice peak** (the owner's "50 % lower" – half as loud). Fades in over 20 f, out over 40 f. Adjustable per reel with `musicVolume`. |
 
 ## 3. Styles and assets have ids
 
